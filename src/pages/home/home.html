@@ -1,17 +1,71 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <button ion-button menuToggle icon-only>
+            <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Home
+    </ion-title>
   </ion-navbar>
+  <!--slide  -->
+  <ion-slides (ionSlideDidChange)="slideChanged()" autoplay="500" loop="true" speed="3000">
+    <ion-slide>
+      <img src="../../assets/images/hinh1.jpg" />
+    </ion-slide>
+    <ion-slide>
+      <img src="../../assets/images/hinh2.jpg" />
+    </ion-slide>
+    <ion-slide>
+      <img src="../../assets/images/hinh1.jpg" />
+    </ion-slide>
+  </ion-slides>
+  <!--end slide  -->
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<!--menu  -->
+<ion-menu side="left" type="overlay" [content]="mycontent">
+  <ion-header>
+    <ion-navbar>
+      <ion-title>
+        Menus
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="openPage(homePage)">Home</button>
+      <button ion-item (click)="openPage(friendsPage)">Friends</button>
+      <button ion-item (click)="openPage(eventsPage)">Events</button>
+      <ion-item menuClose detail-none>Close Menu</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav id="nav" #mycontent [root]="rootPage"></ion-nav>
+<!--end menu  -->
+
+
+<ion-content>
+  <ion-card *ngFor='let data of datas'>
+    <img src="{{data.imageUrl}}" (click)="clickContent(data.id)"/>
+    <ion-card-content>
+      <ion-card-title (click)="clickContent(data.id)">
+        {{data.title}}
+      </ion-card-title>
+      <p>
+        {{data.content}}
+      </p>
+    </ion-card-content>
+    <!-- <ion-fab bottom left edge>
+      <button ion-fab mini color="dratk"><ion-icon name="arrow-dropleft"></ion-icon></button>
+      <ion-fab-list side="right">
+        <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+        <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+        <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+        <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+      </ion-fab-list>
+    </ion-fab> -->
+  </ion-card>
+
+  
+
 </ion-content>
